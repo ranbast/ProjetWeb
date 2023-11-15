@@ -25,7 +25,7 @@ body {
 .container{
     display: flex;
     flex: 1;
-    align-items: center;
+    margin-top: 5em;
 }
 .leftPanel{
     color: white;
@@ -34,9 +34,12 @@ body {
     width: 20em;
     border-radius: 1em;
     padding:1.5em;
-    height: 37em;
+    height: 40em;
     box-shadow: 10px 10px lightsteelblue;
+    flex-shrink: 0;
+    
 }
+
 footer{
     margin-top : auto;
     color : white;
@@ -49,10 +52,66 @@ footer{
 form{
     display: flex;
     flex-direction: column;
-    gap: 10px;
+    gap: 0.8em;
 }
+
 #submit{
-    margin-top: 2em;
+    margin-top: 0.5em;
 }
 
+.flatsContainer{
+    display: flex;
+    flex-wrap: wrap;
+    width: 60em;
+    margin-left: 5em;
+    margin-bottom: 2.5em;
+    gap: 2.5em;
+    
+}
 
+.flats{
+    
+    border-radius: 0.5em;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 1px 1px 1px 1px #1F2937;
+    width: 18em;
+    height: 23em;
+    justify-content: end;
+    padding: 0.5em;
+}
+
+#img{
+    border-radius: 0.8em;
+    max-width: fit-content;
+}
+
+#img:hover{
+    overflow: auto;
+    width: 110%;
+
+}
+
+a{
+    list-style: none;
+
+    color: white;
+}
+
+a:hover{
+    text-decoration-line: underline;
+    text-decoration-color: white;
+    text-decoration-thickness: 1px;
+}
+
+a.detail{
+    color: black;
+    font-weight: 500;
+}
+
+a.detail:hover{
+    text-decoration-line: underline;
+    text-decoration-color: black;
+    text-decoration-thickness: 1px;
+    font-weight: 600;
+}

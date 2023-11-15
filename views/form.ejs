@@ -1,43 +1,50 @@
 <div class="form-group">
-    <label for="Adresse">Adresse</label>
-    <input type="text" class="form-control" id="adressInput" aria-describedby="address" placeholder="Adresse">
+    <label for="adressInput">Adresse</label>
+    <input type="text" class="form-control" id="adressInput" aria-describedby="address" placeholder="Adresse" name="address" autocomplete="on">
   </div>
   <div class="form-group">
-    <label for="dateEntree">Dates</label>
-    <input type="text" class="form-control" id="dateEntree" placeholder="Dates du séjour">
+    <label for="dateSejour">Dates</label>
+    <input type="text" class="form-control" id="dateSejour" placeholder="Dates du séjour" name="datesSejour">
   </div>
   <div class="form-group">
-      <label for="priceRange" class="form-label">Fourchette de prix</label>
-      <input type="range" class="form-range" min="30" max="1500" value="30" id="customRange">
+      <label for="priceRange" class="form-label">Fourchette de prix</label> <span class="prix">: 0€</span>
+      <input type="range" class="form-range" min="0" max="300" value="0" id="priceRange" name="price">
   </div>
   <div class="form-group">
-      <label for="roomRange" class="form-label">Nombre de chambre</label>
+      <label for="roomRange" class="form-label">Nombre de chambres</label>
   </div>
-  <div class="btn-toolbar" role="toolbar" aria-label="Toolbar with button groups">
-      <div class="btn-group me-2" role="group" aria-label="Second group">
-          <button type="button" class="btn btn-primary">1</button>
-          <button type="button" class="btn btn-primary">2</button>
-          <button type="button" class="btn btn-primary">3</button>
-          <button type="button" class="btn btn-primary">4</button>
-          <button type="button" class="btn btn-primary">5</button>
-          <button type="button" class="btn btn-primary">6</button>
-          <button type="button" class="btn btn-primary">7</button>
-          <button type="button" class="btn btn-primary">8+</button>
-    </div>
+  <div class="select-room" role="selectroom" aria-label="select">
+        <select class="form-select form-select-sm" aria-label="Small select" name="nbrChambre" id="roomRange">
+            <option value=""></option>
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+            <option value="4">4</option>
+            <option value="5">5</option>
+            <option value="6">6</option>
+            <option value="7">7</option>
+            <option value="8">8+</option>
+          </select>
   </div>
   <div class="form-group">
-      <label for="bedRange" class="form-label">Nombre de lit</label>
+      <label for="bedRange" class="form-label">Nombre de lits</label>
   </div>
-  <div class="btn-toolbar" role="toolbar" aria-label="Toolbar with button groups">
-      <div class="btn-group me-2" role="group" aria-label="Second group">
-          <button type="button" class="btn btn-primary">1</button>
-          <button type="button" class="btn btn-primary">2</button>
-          <button type="button" class="btn btn-primary">3</button>
-          <button type="button" class="btn btn-primary">4</button>
-          <button type="button" class="btn btn-primary">5</button>
-          <button type="button" class="btn btn-primary">6</button>
-          <button type="button" class="btn btn-primary">7</button>
-          <button type="button" class="btn btn-primary">8+</button>
-    </div>
-  </div>
+  <div class="select-bed" role="selectbed;" aria-label="select">
+    <select class="form-select form-select-sm" aria-label="Small select" name="nbrBed" id="bedRange">
+        <option value=""></option>
+        <option value="1">1</option>
+        <option value="2">2</option>
+        <option value="3">3</option>
+        <option value="4">4</option>
+        <option value="5">5</option>
+        <option value="6">6</option>
+        <option value="7">7</option>
+        <option value="8">8+</option>
+      </select>
+</div>
+<div class="form-group">
+  <label for="distanceRange" class="form-label">Distance du centre-ville</label><span class="distance">: 4000m</span>
+
+  <input type="range" class="form-range" min="0" max="8000" id="distanceRange" name="distance">
+</div>
   <button type="submit" class="btn btn-primary" id="submit">Rechercher</button>
