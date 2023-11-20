@@ -81,12 +81,12 @@ form{
     padding: 0.5em;
 }
 
-#img{
+#previewLogement{
     border-radius: 0.8em;
     max-width: fit-content;
 }
 
-#img:hover{
+#previewLogement:hover{
     overflow: auto;
     width: 110%;
 
@@ -114,4 +114,38 @@ a.detail:hover{
     text-decoration-color: black;
     text-decoration-thickness: 1px;
     font-weight: 600;
+}
+
+div.images{
+    display: flex;
+    gap: 1em;
+    margin-top: 2em;
+    
+}
+
+.mainImage img{
+    width: 35em;
+    height: auto;
+    border-radius: 0.5em 0 0 0.5em ;
+}
+
+.imagesGallery{
+    display: flex;
+    flex-flow: row wrap;
+    gap: 0.5em;
+}
+.imagesGallery img{
+    width: 15em;
+}
+
+.outerPic {
+    border-radius: 0 0.5em 0.5em 0;
+}
+
+
+
+.formBien{
+    width: 14em;
+    border: 1px solid grey;
+    border-radius: 0.5em;
 }

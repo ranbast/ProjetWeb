@@ -101,24 +101,24 @@ app.get("/bien/:idBien", async (req,res) => {
         console.error("Erreur lors de la récupération des données du biens:", error);
         res.status(500).send("Erreur lors de la récupération des données du biens");
     }
-
     
 })
 
 const fetchDatabyIdBien = (idBien) => {
-    return new Promise((reject, resolve) =>{
-        let sql = "SELECT * FROM biens WHERE idBien =?"
-        sql += idBien
+    return new Promise((resolve, reject) =>{
+        let sql = "SELECT *, AVG(locations.note) as moyenneNote, COUNT(locations.note) as nbrNotes, COUNT(locations.avis) as nbrAvis FROM biens NATURAL JOIN locations WHERE idBien = ?"
+        const params = [];
+        params.push(idBien);
 
-        con.query(sql, function(err,result){
+
+        con.query(sql, [params], function(err,result){
             if (err){
                 reject (err);
             }else{
                 resolve(result);
             }
         });
-
-    })
+    });
 }
 
 
