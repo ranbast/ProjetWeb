@@ -1,9 +1,7 @@
-$(function(){
-    let dateRangePicker = document.getElementById('dateSejour');
-    let pickerRange = new Litepicker({
-        element: dateRangePicker,
-        format: 'DD/MM/YYYY',
-        singleMode: false,
-        lang: "fr-FR"
-    });
+document.querySelector("#connexion").addEventListener("click", function(){
+    document.querySelector(".popup").style.display = "flex";
 });
+
+document.querySelector("#close").addEventListener("click",function(){
+    document.querySelector(".popup").style.display = "none";
+})

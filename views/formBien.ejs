@@ -1,7 +1,8 @@
+<form class="reservation" action="/reservation" method="post" onsubmit="this.submit(), this.reset();">
 <div class="formBien">
   <div class="form-group">
-    <label for="dateSejour">Dates</label>
-    <input type="text" class="form-control" id="dateSejour" placeholder="Dates du séjour" name="datesSejour" autocomplete="off">
+    <label for="datesSejour">Dates</label>
+    <input type="text" class="form-control" id="datesSejour" placeholder="Dates du séjour" name="datesSejour" autocomplete="off">
     <div class="select-ppl" role="selectppl" aria-label="select">
         <span>Nombre de voyageurs</span>
         <select class="form-select form-select-sm" aria-label="Small select" name="nbrPpl" id="nbrPpl">
@@ -16,7 +17,9 @@
             <option value="8">8+</option>
           </select>
     </div>
+    <input type="hidden" id="idBien" name="idBien" value="<%= data[0].idBien %>">
     <button type="submit" class="btn btn-primary" id="submit">Réserver</button>
   </div>
-    <span>Total </span>
+    <span>Total <%=data[0].prix%>€</span>
 </div>
+</form>
