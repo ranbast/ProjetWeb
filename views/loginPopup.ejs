@@ -1,14 +1,21 @@
+<form action="/login" method="post">
 <div class="popup">
     <div class="popup-content">
-        <%- include("cross_svg") %>
+      <div class="popupTitle">
+
+     
+      <span class="popupTitle">Connexion</span>
+      <span class="close"><%- include("cross_svg") %></span>
+    </div>
         <div class="form-floating mb-3">
-            <input type="email" class="form-control" id="floatingInput" placeholder="name@example.com" name="Identifiant">
+            <input type="email" class="form-control" id="floatingInput" placeholder="name@example.com" name="identifiant">
             <label for="floatingInput">Adresse email</label>
           </div>
           <div class="form-floating">
-            <input type="password" class="form-control" id="floatingPassword" placeholder="Password" name="Identifiant">
+            <input type="password" class="form-control" id="floatingPassword" placeholder="Password" name="password">
             <label for="floatingPassword">Mot de passe</label>
           </div>
         <button type="submit" class="btn btn-primary" id="login">Se connecter</button>
     </div>
 </div>
+</form>

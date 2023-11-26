@@ -1,25 +1,14 @@
 <form class="reservation" action="/reservation" method="post" onsubmit="this.submit(), this.reset();">
 <div class="formBien">
+  <div class="mb-1">
+    <label for="exampleFormControlInput1" class="form-label">Adresse email</label>
+    <input type="email" class="form-control" id="exampleFormControlInput1" placeholder="nom@exemple.com" name="email">
+  </div>
   <div class="form-group">
     <label for="datesSejour">Dates</label>
     <input type="text" class="form-control" id="datesSejour" placeholder="Dates du séjour" name="datesSejour" autocomplete="off">
-    <div class="select-ppl" role="selectppl" aria-label="select">
-        <span>Nombre de voyageurs</span>
-        <select class="form-select form-select-sm" aria-label="Small select" name="nbrPpl" id="nbrPpl">
-            <option value=""></option>
-            <option value="1">1</option>
-            <option value="2">2</option>
-            <option value="3">3</option>
-            <option value="4">4</option>
-            <option value="5">5</option>
-            <option value="6">6</option>
-            <option value="7">7</option>
-            <option value="8">8+</option>
-          </select>
-    </div>
     <input type="hidden" id="idBien" name="idBien" value="<%= data[0].idBien %>">
     <button type="submit" class="btn btn-primary" id="submit">Réserver</button>
   </div>
-    <span>Total <%=data[0].prix%>€</span>
 </div>
 </form>

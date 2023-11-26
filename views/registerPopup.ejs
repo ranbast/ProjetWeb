@@ -1,0 +1,19 @@
+<form action="/register" method="post">
+  <div class="popupRegister">
+      <div class="popup-content">
+        <div class="popupTitle">
+        <span class="popupTitle">S'enregistrer</span>
+        <span class="closeRegister"><%- include("cross_svg") %></span>
+      </div>
+          <div class="form-floating mb-3">  
+              <input type="email" class="form-control" id="floatingInput" placeholder="name@example.com" name="identifiantRegister">
+              <label for="floatingInput">Adresse email</label>
+            </div>
+            <div class="form-floating">
+              <input type="password" class="form-control" id="floatingPassword" placeholder="Password" name="passwordRegister">
+              <label for="floatingPassword">Mot de passe</label>
+            </div>
+          <button type="submit" class="btn btn-primary" id="login">S'enregistrer</button>
+      </div>
+  </div>
+  </form>
