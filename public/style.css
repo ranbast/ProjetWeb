@@ -65,7 +65,6 @@ form{
     margin-left: 5em;
     margin-bottom: 2.5em;
     gap: 2.5em;
-    
 }
 
 .flats{
@@ -87,7 +86,6 @@ form{
 #previewLogement:hover{
     overflow: auto;
     width: 110%;
-
 }
 
 a{
@@ -158,9 +156,15 @@ div.images{
 .commentsContainer{
     display: flex;
     flex-direction: column;
+    width: 40em;;
     margin-top: 2em;
+    margin-bottom: 4em;
 }
 
+.addComment{
+    position: absolute;
+    align-self: flex-end;
+}
 
 #avis{
     font-style: oblique;
@@ -218,7 +222,7 @@ div.images{
     cursor: pointer;
 }
 
-#connexion:hover{
+#connexion:hover, #register:hover{
     text-decoration-line: underline;
 }
 
@@ -237,3 +241,4 @@ div.images{
     color: white;
     justify-content: center;
 }
+

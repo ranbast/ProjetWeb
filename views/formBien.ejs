@@ -1,14 +1,15 @@
-<form class="reservation" action="/reservation" method="post" onsubmit="this.submit(), this.reset();">
+<form class="reservation" action="/reservation" method="post">
 <div class="formBien">
-  <div class="mb-1">
-    <label for="exampleFormControlInput1" class="form-label">Adresse email</label>
-    <input type="email" class="form-control" id="exampleFormControlInput1" placeholder="nom@exemple.com" name="email">
-  </div>
+  <% if (session.userid){ %>
   <div class="form-group">
     <label for="datesSejour">Dates</label>
     <input type="text" class="form-control" id="datesSejour" placeholder="Dates du séjour" name="datesSejour" autocomplete="off">
     <input type="hidden" id="idBien" name="idBien" value="<%= data[0].idBien %>">
     <button type="submit" class="btn btn-primary" id="submit">Réserver</button>
+
   </div>
+  <% }else{ %>
+    <span>Veuillez vous connecter pour pouvoir réserver</span>
+  <% } %>
 </div>
 </form>

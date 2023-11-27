@@ -44,29 +44,40 @@
     <div class="container">
         <% data.forEach(entry => { %>
             <div class="infoLogement">
-            <span><h2><%= entry.commune %>, <%= entry.cp %>, France</h2></span>
-            <%- include('star_svg');%>
-            <span><%= entry.moyenneNote %>/5 ⸱</span>
-            <span><%= entry.nbrAvis %> commentaires</span>
-                <div class="images">
-                    <div class="mainImage">
-                        <img id="img" src="/images/test.webp" width="600px">
+                <span><h2><%= entry.commune %>, <%= entry.cp %>, France</h2></span>
+                <%- include('star_svg');%>
+                <span><%= entry.moyenneNote %>/5 ⸱</span>
+                <span><%= entry.nbrAvis %> commentaires</span>
+                    <div class="images">
+                        <div class="mainImage">
+                            <img id="img" src="/images/test.webp" width="600px">
+                        </div>
+                        <div class="imagesGallery">
+                            <img id="img" src="/images/1.webp" width="200px">
+                            <img id="img" src="/images/2.webp" class="outerPic" width="200px">
+                            <img id="img" src="/images/3.webp" width="200px">
+                            <img id="img" src="/images/4.webp" class="outerPic" width="200px">
+                        </div>
+                        <div class="rightContainer">
+                            <%- include('formBien'); %>
+                        </div>
                     </div>
-                    <div class="imagesGallery">
-                        <img id="img" src="/images/1.webp" width="200px">
-                        <img id="img" src="/images/2.webp" class="outerPic" width="200px">
-                        <img id="img" src="/images/3.webp" width="200px">
-                        <img id="img" src="/images/4.webp" class="outerPic" width="200px">
-                    </div>
-                    <div class="rightContainer">
-                        <%- include('formBien'); %>
-                    </div>
+            <% }) %>
+            <div class="commentsContainer">
+                <h3>Commentaires</h3>
+                <%- include('comments'); %>
+                <div class="addComment">
+                    <% if (session.userid){ %>
+                        <button type="submit" class="btn btn-primary" id="btnComment">Ajouter un commentaire</button>
                 </div>
-           <% }) %>
-           <%= session.userid;  %>
-           <div class="commentsContainer">
-            <h3>Commentaires</h3>
-            <%- include('comments'); %>
+                <form action="/post" method="post">
+                <div class="textComment">
+                    <label for="exampleFormControlTextarea1" class="form-label"></label>
+                    <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" name="textArea"></textarea>
+                </div>
+                <% } %>
+            </form>
+            </div>
             </div>
         </div>
     </div>

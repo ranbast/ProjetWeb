@@ -6,7 +6,7 @@
             <li id="connexion" class="navbarElement">Connexion</li>
             <li id="register" class="navbarElement">S'enregistrer</li>
         <% } else { %>
-            <li id="connexion" class="navbarElement">Bienvenue <%= session.userid %></li>
+            <li id="connected" class="navbarElement">Bienvenue <%= session.userid %></li>
             <li id="logout" class="navbarElement"><a href="/logout">Se deconnecter</li></a>
         <% } %>
         <li class="navbarElement"></li>

@@ -34,7 +34,7 @@ con.connect(function (err){
 var session
 
 app.get('/', async (req,res) => {
-    session = req.session;
+    const session = req.session;
 
     try{
     const address = req.query.address;
@@ -115,7 +115,7 @@ const fetchBiens = (address,dateDebut,dateFin,prix,nbrChambre,nbrBed,distance) =
 
 
 app.get("/bien/:idBien", async (req,res) => {
-    session = req.session;  
+    const session = req.session;  
     try{
         const dataBien = await fetchDatabyIdBien(req.params.idBien);
         const reservedDates = await fetchReservedDatesForApartment(req.params.idBien);
@@ -145,31 +145,14 @@ const fetchDatabyIdBien = (idBien) => {
 }
 
 app.post("/reservation", async(req,res) =>{
-    session = req.session;
+    const session = req.session;
         const datesSejour = req.body.datesSejour;
         const dateDebut = datesSejour.split(" ")[0];
         const dateFin = datesSejour.split(" ")[1];
 
-        const userMail = req.body.email; 
-        const checkEmail = 'SELECT COUNT(*) AS userCount FROM utilisateurs WHERE mail = ?';
-
-
-        con.query(checkEmail, [userMail], function(err,result){
-            if (err){
-                throw err;
-            }else{
-                const userCount = result[0].userCount; 
-                
-                if (userCount === 0){
-                    return res.status(400).render("failed");
-                }
-
-            }
-        })
-
         const locationData = {
             idBien: req.body.idBien,
-            mailLoueur: userMail,
+            mailLoueur: req.session.userid,
             dateDebut: dateDebut,
             dateFin: dateFin,
             avis: null,
@@ -180,10 +163,10 @@ app.post("/reservation", async(req,res) =>{
 
         con.query(sql, locationData, function(err,result){
             if (err){
-                result.status(400).render("failed");
+                res.status(400).render("failed", {session: req.session});
             } 
             else{
-                result.status(200).render("success");
+                res.status(200).render("success", {session: req.session});
             }
           });
 })
@@ -206,8 +189,6 @@ const fetchReservedDatesForApartment = (idBien) => {
 };
 
 
-
-
 app.post("/login", async(req,res) =>{
     
     const userQuery = "SELECT mail as identifiant, password as pwd from utilisateurs where mail = ? AND password = ?"
@@ -225,29 +206,29 @@ app.post("/login", async(req,res) =>{
         const user = result[0];
 
             if (!user){
-                res.render("failed");
+                res.render("failed", {session : req.session});
                 return;
             }
 
-            session = req.session;
+        const session = req.session;
             session.userid = req.body.identifiant;
-            console.log(req.session.userid);
-            res.redirect("/");
+            res.redirect("back");
             })
 });
 
 
 app.get("/logout",async (req,res) =>{
     req.session.destroy();
-    res.redirect("/");
+    res.redirect("back");
 })
 
 app.post("/register", async (req,res) => {
+    const session = req.session;
 
     let registerQuery = "INSERT INTO utilisateurs SET ?"
 
     utilisateur = {
-    mail: req.body.identifiantRegister,
+    mail: req.session.identifiantRegister,
     prenom: null,
     nom : null,
     telephone: null,
@@ -257,9 +238,13 @@ app.post("/register", async (req,res) => {
     con.query(registerQuery, utilisateur, (err,result) => {
         if (err) throw err;
         else{
-            result.status(200).render("success");
+            result.status(200).render("success", {session: session.userid});
         }
 
     })
 
+})
+
+app.post("/post", async (req,res) => {
+    let postQuery = "INSERT INTO locations where idBien = ? and mailLoueur = ?" 
 })
