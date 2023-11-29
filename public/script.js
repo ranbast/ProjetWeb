@@ -54,4 +54,3 @@ document.querySelector("body").addEventListener("click",function(event){
         popupRegister.style.display = "none";
     }
 })
-

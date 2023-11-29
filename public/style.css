@@ -242,3 +242,9 @@ div.images{
     justify-content: center;
 }
 
+#map {
+    height: 20em; /* Adjust height as needed */
+    width: 83%;   /* Adjust width as needed */
+    margin-bottom: 5em;
+
+}

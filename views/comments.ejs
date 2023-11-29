@@ -1,3 +1,7 @@
 <div class="commentary">
-<span id="avis">"<%= data[0].avis %>" </span> <span>écrit par <%= data[0].mailLoueur%></span>
+
+<% avis.forEach(avis => { %>
+        <span id = "avis"> <%= avis.avis %></span> ecrit par <%= avis.mailLoueur %></br></span>
+    <% }) %>
+
 </div>

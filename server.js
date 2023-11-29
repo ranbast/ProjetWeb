@@ -7,7 +7,7 @@ const path = require('path');
 const app = express();
 const mysql = require("mysql")
 app.set('view engine', 'ejs');
-app.use(express.urlencoded({ extended: false }));
+app.use(express.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname,'public')));
 
 
@@ -119,7 +119,9 @@ app.get("/bien/:idBien", async (req,res) => {
     try{
         const dataBien = await fetchDatabyIdBien(req.params.idBien);
         const reservedDates = await fetchReservedDatesForApartment(req.params.idBien);
-        res.render('bien', { data: dataBien, reservedDates: reservedDates, session: session });
+        const avis = await fetchAvisByIdBien(req.params.idBien);
+        console.log(avis);
+        res.render('bien', { data: dataBien, reservedDates: reservedDates, session: session, avis: avis});
 
 
     }catch (error){
@@ -206,13 +208,13 @@ app.post("/login", async(req,res) =>{
         const user = result[0];
 
             if (!user){
-                res.render("failed", {session : req.session});
+                res.render("failedToLogin", {session : req.session});
                 return;
             }
 
         const session = req.session;
             session.userid = req.body.identifiant;
-            res.redirect("back");
+            res.redirect('back');
             })
 });
 
@@ -228,7 +230,7 @@ app.post("/register", async (req,res) => {
     let registerQuery = "INSERT INTO utilisateurs SET ?"
 
     utilisateur = {
-    mail: req.session.identifiantRegister,
+    mail: req.body.identifiantRegister,
     prenom: null,
     nom : null,
     telephone: null,
@@ -236,15 +238,56 @@ app.post("/register", async (req,res) => {
     }
 
     con.query(registerQuery, utilisateur, (err,result) => {
-        if (err) throw err;
+        if (err){
+            res.render('failedToRegister', {session: req.session})
+        }
         else{
             result.status(200).render("success", {session: session.userid});
         }
-
     })
 
 })
 
-app.post("/post", async (req,res) => {
-    let postQuery = "INSERT INTO locations where idBien = ? and mailLoueur = ?" 
-})
+app.post("/post", async (req, res) => {
+    const session = req.session;
+
+
+    let postQuery = "INSERT INTO locations SET ?";
+
+     const params = {
+            idBien: req.body.idBien,
+            mailLoueur: req.session.userid,
+            dateDebut: null,
+            dateFin: null,
+            avis: req.body.textArea,
+            note: null,
+          };
+
+
+
+    con.query(postQuery, params, (err, result) => {
+        if (err) {
+            console.error("Error executing query:", err);
+            throw err;
+        } else {
+            console.log("Query result:", result);
+            res.redirect("back");
+        }
+    });
+});
+
+
+const fetchAvisByIdBien = (idBien) => {
+    return new Promise((resolve, reject) =>{
+        const sql = "SELECT avis, mailLoueur FROM locations where idBien = ?"
+
+        con.query(sql, idBien, (err,results) =>{
+            if (err){
+                reject (err);
+            }else{
+                const avis = results;
+                resolve(avis);
+            }
+        });
+    });
+}

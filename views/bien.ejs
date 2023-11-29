@@ -1,9 +1,18 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+    integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
+    crossorigin=""/>
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+    integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
+    crossorigin="" defer></script>
     <%- include('head'); %>
     <script src="/scriptBien.js" defer></script>
     <input type="hidden" id="reservedDates" value="<%= JSON.stringify(reservedDates) %>">
+    <input type="hidden" id="longitude" value="<%= data[0].longitude %>">
+    <input type="hidden" id="latitude" value="<%= data[0].latitude%>">
+    <input type="hidden" id="prix" value="<%= data[0].prix%>">
 
     <script>
         $(function(){
@@ -47,6 +56,7 @@
                 <span><h2><%= entry.commune %>, <%= entry.cp %>, France</h2></span>
                 <%- include('star_svg');%>
                 <span><%= entry.moyenneNote %>/5 ⸱</span>
+                
                 <span><%= entry.nbrAvis %> commentaires</span>
                     <div class="images">
                         <div class="mainImage">
@@ -66,29 +76,32 @@
             <div class="commentsContainer">
                 <h3>Commentaires</h3>
                 <%- include('comments'); %>
-                <div class="addComment">
                     <% if (session.userid){ %>
-                        <button type="submit" class="btn btn-primary" id="btnComment">Ajouter un commentaire</button>
-                </div>
-                <form action="/post" method="post">
-                <div class="textComment">
-                    <label for="exampleFormControlTextarea1" class="form-label"></label>
-                    <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" name="textArea"></textarea>
-                </div>
+                        <form method="post" action="/post">
+                            <input type="hidden" name="idLocation" value="<%= data[0].idLocation %>">
+                            <input type="hidden" name="idBien" value="<%= data[0].idBien %>">
+                            <div class="textComment">
+                                <label for="exampleFormControlTextarea1" class="form-label"></label>
+                                <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" name="textArea"></textarea>
+                                <button type="submit" class="btn btn-primary" id="btnComment">Ajouter un commentaire</button>
+                            </div>
+                        </form>
                 <% } %>
-            </form>
-            </div>
-            </div>
-        </div>
-    </div>
+             
 
+            </form>
+           
+            </div>
+            <div id="map">
+            </div>
+            </div>
+       
+        </div>
+       
+    </div>
+   
     <footer>
         <%- include('footer'); %>
     </footer>
 </body>
-
-
-
-
 </html>
-
