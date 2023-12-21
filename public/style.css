@@ -227,17 +227,18 @@ div.images{
 }
 
 .successContainer, 
-.failedContainer{
+.failedContainer,
+.successfulRegister{
     display: flex;
     margin-top: auto;
     margin-bottom: 0 auto;
-    width: 25em;
-    height: 10em;
+    width: 29em;
+    height: 15em;
     align-self: center;
     background-color:#4a5e7a;
     border-radius: 0.5em;
     box-shadow: 0.5em 0.5em lightsteelblue;
-    padding: 1em;
+    padding: 3em;
     color: white;
     justify-content: center;
 }

@@ -151,19 +151,14 @@ app.post("/reservation", async(req,res) =>{
         const datesSejour = req.body.datesSejour;
         const dateDebut = datesSejour.split(" ")[0];
         const dateFin = datesSejour.split(" ")[1];
+        
+        idBien = req.body.idBien;
+        mailLoueur = req.session.userid;
+           
+        let sql = "INSERT INTO locations (idBien, mailLoueur, dateDebut, dateFin) values (?,?,?,?)";
+        const values = [idBien,mailLoueur,dateDebut,dateFin];
 
-        const locationData = {
-            idBien: req.body.idBien,
-            mailLoueur: req.session.userid,
-            dateDebut: dateDebut,
-            dateFin: dateFin,
-            avis: null,
-            note: null,
-          };
-          
-          let sql = "INSERT INTO locations SET ?";
-
-        con.query(sql, locationData, function(err,result){
+        con.query(sql, values, function(err,result){
             if (err){
                 res.status(400).render("failed", {session: req.session});
             } 
@@ -239,10 +234,10 @@ app.post("/register", async (req,res) => {
 
     con.query(registerQuery, utilisateur, (err,result) => {
         if (err){
-            res.render('failedToRegister', {session: req.session})
+            res.status(400).render('failedToRegister', {session: req.session})
         }
         else{
-            result.status(200).render("success", {session: session.userid});
+            res.status(200).render("successfulRegister", {session: req.session});
         }
     })
 
